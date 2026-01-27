@@ -3,6 +3,7 @@ package com.example.employee_api.service.impl;
 import com.example.employee_api.entity.Employee;
 import com.example.employee_api.repository.EmployeeRepository;
 import com.example.employee_api.service.EmployeeService;
+import com.example.employee_api.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,10 +27,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
+//    @Override
+//    public Employee findById(Long id) {
+//        return employeeRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Employee not found"));
+//    }
+
     @Override
     public Employee findById(Long id) {
         return employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
     }
 
     @Override
