@@ -18,6 +18,7 @@ public class EmployeeRequestDTO {
     private String department;
 
     @NotNull(message = "Salary wajib diisi")
-    @Positive(message = "Salary harus lebih dari 0")
+    @Positive(message = "Salary harus lebih besar dari 0")
     private Double salary;
+
 }
