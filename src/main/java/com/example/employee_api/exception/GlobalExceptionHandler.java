@@ -39,4 +39,12 @@ public class GlobalExceptionHandler {
                 .body(response);
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ApiResponse<Object>> handleBadRequest(
+            BadRequestException ex) {
+
+        return ResponseEntity.badRequest()
+                .body(new ApiResponse<>(false, ex.getMessage(), null));
+    }
+
 }

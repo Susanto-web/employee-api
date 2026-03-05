@@ -3,11 +3,10 @@ package com.example.employee_api.service.impl;
 import com.example.employee_api.entity.Employee;
 import com.example.employee_api.repository.EmployeeRepository;
 import com.example.employee_api.service.EmployeeService;
-import com.example.employee_api.exception.ResourceNotFoundException;
+import com.example.employee_api.exception.*;
 import com.example.employee_api.dto.EmployeeRequestDTO;
 import com.example.employee_api.dto.EmployeePatchRequestDTO;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -92,7 +91,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 && request.getEmail() == null
                 && request.getDepartment() == null
                 && request.getSalary() == null) {
-            throw new IllegalArgumentException("No data to update");
+            //throw new IllegalArgumentException("No data to update");
+            throw new BadRequestException("No data to update");
         }
 
         if (request.getName() != null) {
