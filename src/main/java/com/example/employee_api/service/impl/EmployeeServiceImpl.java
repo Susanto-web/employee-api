@@ -28,12 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
-//    @Override
-//    public Employee findById(Long id) {
-//        return employeeRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Employee not found"));
-//    }
-
     @Override
     public Employee findById(Long id) {
         return employeeRepository.findById(id)
@@ -55,17 +49,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(employee);
     }
 
-
-//    @Override
-//    public Employee updateById(Long id, Employee employee) {
-//        Employee existing = findById(id);
-//        existing.setName(employee.getName());
-//        existing.setEmail(employee.getEmail());
-//        existing.setDepartment(employee.getDepartment());
-//        existing.setSalary(employee.getSalary());
-//        return employeeRepository.save(existing);
-//    }
-
     @Override
     public void deleteById(Long id) {
         Employee employee = employeeRepository.findById(id)
@@ -74,11 +57,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.delete(employee);
     }
-
-//    @Override
-//    public void delete(Long id) {
-//        employeeRepository.deleteById(id);
-//    }
 
     @Override
     public Employee patchById(Long id, EmployeePatchRequestDTO request) {
@@ -91,7 +69,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 && request.getEmail() == null
                 && request.getDepartment() == null
                 && request.getSalary() == null) {
-            //throw new IllegalArgumentException("No data to update");
             throw new BadRequestException("No data to update");
         }
 
@@ -113,6 +90,4 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return employeeRepository.save(employee);
     }
-
-
 }
