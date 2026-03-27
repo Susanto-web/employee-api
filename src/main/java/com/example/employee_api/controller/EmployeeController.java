@@ -5,6 +5,7 @@ import com.example.employee_api.service.EmployeeService;
 import com.example.employee_api.dto.*;
 import com.example.employee_api.response.*;
 import com.example.employee_api.exception.GlobalExceptionHandler.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class EmployeeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<EmployeeResponseDTO>> create(
             @Valid @RequestBody EmployeeRequestDTO dto) {
 
@@ -35,6 +37,7 @@ public class EmployeeController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<ApiResponse<List<EmployeeResponseDTO>>> getAll() {
         List<EmployeeResponseDTO> data = employeeService.findAll()
                 .stream()
@@ -45,6 +48,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public ResponseEntity<ApiResponse<EmployeeResponseDTO>> getById(
             @PathVariable Long id) {
 
@@ -64,6 +68,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<Object>> deleteById(
             @PathVariable Long id) {
 
@@ -76,6 +81,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<EmployeeResponseDTO>> updateById(
             @PathVariable Long id,
             @Valid @RequestBody EmployeeRequestDTO request) {
@@ -97,6 +103,7 @@ public class EmployeeController {
     }
 
     @PatchMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<EmployeeResponseDTO>> patchById(
             @PathVariable Long id,
             @Valid @RequestBody EmployeePatchRequestDTO request) {

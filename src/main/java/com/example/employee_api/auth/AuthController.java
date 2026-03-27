@@ -2,6 +2,7 @@ package com.example.employee_api.auth;
 
 import com.example.employee_api.auth.dto.LoginRequest;
 import com.example.employee_api.auth.dto.LoginResponse;
+import com.example.employee_api.auth.dto.RegisterRequest;
 import com.example.employee_api.entity.User;
 import com.example.employee_api.repository.UserRepository;
 import com.example.employee_api.security.JwtUtil;
@@ -39,6 +40,26 @@ public class AuthController {
         String token = jwtUtil.generateToken(user.getUsername());
 
         return new LoginResponse(token);
+    }
+
+    @PostMapping("/register")
+    public String register(@RequestBody User request) {
+
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
+            throw new RuntimeException("Username already exists");
+        }
+
+        User newUser = new User();
+        newUser.setUsername(request.getUsername());
+        newUser.setPassword(passwordEncoder.encode(request.getPassword()));
+        newUser.setRole(request.getRole());
+//        newUser.setEmail(request.getEmail());
+
+        userRepository.save(newUser);
+
+
+
+        return "User registered successfully";
     }
 }
 
