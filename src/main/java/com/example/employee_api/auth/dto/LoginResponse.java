@@ -3,18 +3,13 @@ package com.example.employee_api.auth.dto;
 public class LoginResponse {
 
     private String token;
-    private String type = "Bearer";
 
-    public LoginResponse(String token) {
+    public LoginResponse(String token){
         this.token = token;
     }
 
-    public String getToken() {
+    public String getToken(){
         return token;
-    }
-
-    public String getType() {
-        return type;
     }
 }
 
@@ -24,6 +19,7 @@ public class LoginResponse {
 //public class LoginResponse {
 //
 //    private String token;
+//    private String type = "Bearer";
 //
 //    public LoginResponse(String token) {
 //        this.token = token;
@@ -31,5 +27,9 @@ public class LoginResponse {
 //
 //    public String getToken() {
 //        return token;
+//    }
+//
+//    public String getType() {
+//        return type;
 //    }
 //}
