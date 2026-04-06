@@ -1,8 +1,14 @@
 package com.example.employee_api.auth.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
 public class LoginRequest {
 
+    @NotBlank(message = "Username wajib diisi (Username cannot be blank)")
     private String username;
+    @NotBlank(message = "Password wajib diisi (Password cannot be blank)")
     private String password;
 
     public String getUsername() {
