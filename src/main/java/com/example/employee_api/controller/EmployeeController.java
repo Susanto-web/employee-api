@@ -80,6 +80,13 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteById(id);
+        return ResponseEntity.ok("Deleted successfully");
+    }
+
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<EmployeeResponseDTO>> updateById(
